@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskFlow · Gestión de Tareas</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="cabecera">
+    <h1>&#9989; TaskFlow</h1>
+    <p>Aplicación de gestión de tareas · Programación Avanzada en JavaScript</p>
+  </header>
+
+  <main class="contenedor">
+    <!-- Panel lateral: formulario y opciones -->
+    <aside class="panel">
+      <form id="form-tarea" class="formulario" novalidate>
+        <h2>Nueva tarea</h2>
+
+        <label for="descripcion">Descripción</label>
+        <input
+          type="text"
+          id="descripcion"
+          name="descripcion"
+          placeholder="Ej: Terminar el trabajo de JavaScript"
+          autocomplete="off"
+          required
+        />
+
+        <label for="fechaLimite">Fecha límite (opcional)</label>
+        <input type="datetime-local" id="fechaLimite" name="fechaLimite" />
+
+        <button type="submit" id="btn-agregar" disabled>Agregar tarea</button>
+      </form>
+
+      <div class="panel-acciones">
+        <h2>Opciones</h2>
+
+        <button type="button" id="btn-notificacion">Mostrar notificación (2 s)</button>
+        <button type="button" id="btn-cargar-api">Cargar tareas desde la API</button>
+        <button type="button" id="btn-guardar-api">Guardar tareas en la API</button>
+        <button type="button" id="btn-limpiar">Vaciar lista</button>
+
+        <p class="ayuda">
+          Hacé clic sobre el estado de una tarea para avanzarlo:
+          <em>pendiente → en progreso → completada</em>.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Sección principal: buscador, resumen y lista -->
+    <section class="lista-seccion">
+      <h2>Mis tareas</h2>
+
+      <input
+        type="search"
+        id="buscador"
+        class="buscador"
+        placeholder="Buscar tareas... (escribí para filtrar)"
+      />
+
+      <div id="resumen" class="resumen" aria-live="polite"></div>
+
+      <ul id="lista-tareas" class="lista-tareas"></ul>
+
+      <p id="vacio" class="vacio">No hay tareas todavía. ¡Agregá la primera!</p>
+    </section>
+  </main>
+
+  <!-- Contenedor de notificaciones (toasts) -->
+  <div id="notificaciones" class="notificaciones" aria-live="polite"></div>
+
+  <!-- Scripts clásicos cargados en orden de dependencia:
+       Tarea → GestorTareas → StorageService → app -->
+  <script src="js/Tarea.js"></script>
+  <script src="js/GestorTareas.js"></script>
+  <script src="js/StorageService.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

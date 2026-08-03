@@ -1,0 +1,19 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "TaskFlow - Aplicación de gestión de tareas (Evaluación: Programación avanzada en JavaScript)",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "server": "npx http-server ."
+  },
+  "keywords": [
+    "javascript",
+    "poo",
+    "es6",
+    "dom",
+    "fetch",
+    "localstorage"
+  ],
+  "license": "MIT"
+}

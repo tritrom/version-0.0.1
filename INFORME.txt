@@ -1,0 +1,92 @@
+========================================
+TASKFLOW v0.0.1 - INFORME BREVE DEL CODIGO
+Aplicacion de gestion de tareas en JavaScript
+Programacion avanzada en JavaScript
+========================================
+
+REPOSITORIO EN GITHUB:
+https://github.com/tritrom/APLICACION-DE-GESTION-DE-TAREAS-EN-JAVASCRIPT
+
+========================================
+
+1) QUE ES
+TaskFlow es una aplicacion web que permite crear, editar (cambiar de
+estado), buscar y eliminar tareas. Incluye persistencia en localStorage
+y consumo de una API externa. Se apoya en POO, ES6+, eventos del DOM,
+asincronia y consumo de APIs.
+
+2) ESTRUCTURA DE ARCHIVOS
+- index.html            -> estructura de la pagina (formulario, lista,
+                           buscador, panel de opciones). Carga los
+                           archivos JS en orden.
+- css/styles.css        -> estilos visuales de la interfaz.
+- js/Tarea.js           -> clase Tarea (modelo de una tarea).
+- js/GestorTareas.js    -> clase GestorTareas (administra la lista).
+- js/StorageService.js  -> persistencia en localStorage y API (fetch).
+- js/app.js             -> controlador: eventos, DOM y asincronia.
+
+3) EXPLICACION DEL CODIGO POR ARCHIVO
+
+a) js/Tarea.js (POO)
+   Define la clase Tarea con las propiedades:
+   - id, descripcion, estado, fechaCreacion y fechaLimite.
+   Metodos principales:
+   - cambiarEstado(nuevoEstado): cambia el estado validandolo
+     (pendiente -> en-progreso -> completada).
+   - eliminar(): marca la tarea como eliminada.
+   - tiempoRestanteTexto(): calcula el tiempo que falta hasta la
+     fecha limite (se usa en el contador regresivo).
+   - formatearFecha(): da formato legible a las fechas.
+
+b) js/GestorTareas.js (POO + ES6)
+   Administra la coleccion de tareas. Metodos principales:
+   - agregarTarea({descripcion, fechaLimite}): crea una Tarea y la suma.
+   - eliminarTarea(id): la quita de la lista.
+   - buscarTarea(id) / buscarPorTexto(texto): busqueda por id o por texto.
+   - contarPorEstado(): cuenta tareas por estado (reduce).
+   - obtenerTodas(): devuelve copia de la lista (operador spread).
+   Usa arrow functions, destructuring y operadores spread/rest.
+
+c) js/StorageService.js (localStorage + API)
+   - guardarLocal() / cargarLocal(): guarda y recupera tareas en el
+     navegador (localStorage). Si hay error, devuelve una lista vacia.
+   - obtenerDeApi(): usa fetch() (GET) para traer tareas de la API
+     DummyJSON (tareas reales) y las traduce al espanol con la API
+     publica de traduccion MyMemory (traducirAlEspanol()).
+   - guardarEnApi() / guardarTodasEnApi(): usa fetch() (POST) para
+     guardar tareas en la API (JSONPlaceholder).
+   - Las peticiones asincronas manejan errores con try/catch.
+
+d) js/app.js (eventos, DOM y asincronia)
+   Clase TaskFlowApp que une todo:
+   - Eventos capturados:
+       . submit   -> agrega una tarea desde el formulario.
+       . click    -> cambia estado / elimina (delegacion de eventos).
+       . mouseover / mouseout -> resalta la fila de la tarea.
+       . keyup    -> filtra por buscador y habilita el boton.
+   - Renderizado del DOM con template literals (innerHTML).
+   - Asincronia:
+       . setTimeout (1,2 s) simula retardo al agregar una tarea.
+       . setTimeout (2 s) muestra una notificacion de confirmacion.
+       . setInterval (1 s) actualiza el contador regresivo en vivo.
+   - Importa tareas desde la API y las guarda (async/await + try/catch).
+
+4) COMO CUBRE LOS REQUERIMIENTOS
+- POO ........................ clases Tarea y GestorTareas.
+- ES6+ ...................... let/const, template literals, arrow
+                             functions, destructuring, spread/rest.
+- Eventos y DOM ............. submit, click, mouseover, keyup y
+                             renderizado dinamico de la lista.
+- Asincronia ................ setTimeout (retardo y notificacion a los
+                             2 s) y setInterval (contador regresivo).
+- Consumo de APIs ........... fetch() GET desde DummyJSON con traduccion
+                             al espanol (MyMemory) y POST a
+                             JSONPlaceholder, localStorage y try/catch
+                             para errores.
+
+5) COMO EJECUTARLA
+- Doble clic en index.html (no requiere servidor ni instalacion).
+
+========================================
+Fin del informe
+========================================
